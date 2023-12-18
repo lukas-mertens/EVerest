@@ -13,7 +13,7 @@ For a native build, EVerest requires a Linux based system. One reason for that
 is for example Linux socket header files we use for networking.
 
 To get building done on a Windows or Mac system, you can use WSL2 (Windows) or
-Docker / Podman (Mac).
+Lima (Mac).
 
 Required Packages
 =================
@@ -81,6 +81,7 @@ Use `zypper` to get your needed libraries installed:
   zypper install -y --type pattern devel_basis
   zypper install -y git rsync wget cmake doxygen graphviz clang-tools cppcheck boost-devel libboost_filesystem-devel libboost_log-devel libboost_program_options-devel libboost_system-devel libboost_thread-devel java-17-openjdk java-17-openjdk-devel nodejs nodejs-devel npm python3-pip gcc-c++ libopenssl-devel sqlite3-devel libpcap-dev libevent-devel libcap-devel
 
+.. _fedora_setup:
 Fedora
 ------
 Tested with Fedora 37, 38 and 39. Here is how to get your needed libraries with
@@ -93,6 +94,27 @@ Tested with Fedora 37, 38 and 39. Here is how to get your needed libraries with
 
 Now, it's time to continue with the
 :ref:`Quick Start Guide to install EVerest <quickstartguide_main>`.
+
+MacOS
+-----
+
+1. Install _Lima: https://github.com/lima-vm/lima using `brew install lima`.
+2. Start an instance, e.g. based on fedora using
+
+.. code-block:: bash
+
+    limactl start \
+               --name=default \
+               --cpus=8 \
+               --memory=16 \
+               --vm-type=vz \
+               --rosetta \
+               --mount-type=virtiofs \
+               --mount-writable \
+               --network=vzNAT \
+               template://fedora
+
+3. Proceed with the :ref:`Fedora setup <fedora_setup>`.
 
 Troubleshooting
 ===============
